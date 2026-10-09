@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User leaderboard</title>
+    <style>
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; font-family: Arial; }
+        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+        th { background-color: #eee; }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align: center;">Leaderboard</h1>
+
+<table>
+    <a th:href="@{/users/new}"
+       class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-200">
+        Go to create new user
+    </a>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Hero</th>
+        <th>Wins</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${allUsers}">
+        <td th:text="${u.id}">1</td>
+        <td th:text="${u.username}">Nick</td>
+        <td th:text="${u.hero}">Bohater</td>
+        <td th:text="${u.win}">wins</td>
+        <td>
+            <a th:href="@{/users/delete{id}(id=${u.id})}"
+               class="btn-delete"
+               onclick="return confirm('You really want to delete?');">
+                Delete
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/users/edit/{id}(id=${u.id})}"
+               class="btn-edit"
+               onclick="return confirm('You really want to edit?');">
+                Edit
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
